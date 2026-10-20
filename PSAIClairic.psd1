@@ -24,6 +24,7 @@
         'examples/ReceiptImage.ps1'
         'examples/receipt.png'
         'examples/README.md'
+        'assets/psaiclairic-icon.png'
         'README.md'
         'CHANGELOG.md'
         'LICENSE'

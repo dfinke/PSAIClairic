@@ -8,6 +8,7 @@
 
 ### Added
 
+- Added a transparent PSAIClairic logo and centered README header, with the asset included in module installation.
 - Bundled fictional `examples/receipt.png` with checkable totals; the image example defaults to this file.
 - Receipt image example with local image paths, optional text context, ordered extraction, and usage documentation; included in module installation.
 

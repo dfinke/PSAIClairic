@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/psaiclairic-icon.png" alt="PSAIClairic: documents transformed into typed values and forecasts" width="180">
+</p>
+
 # PSAIClairic
 
 **Turn messy text into PowerShell objects—with the uncertainty still attached.**
