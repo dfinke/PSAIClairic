@@ -21,6 +21,7 @@
         'examples/Lists.ps1'
         'examples/Estimates.ps1'
         'examples/Forecast.ps1'
+        'examples/ReceiptImage.ps1'
         'examples/README.md'
         'README.md'
         'CHANGELOG.md'
