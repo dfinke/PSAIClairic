@@ -56,4 +56,18 @@ The bundled sample contains these checkable facts:
 | Currency | USD |
 | Items | Coffee Beans; Sourdough Bread; Apples |
 
-Item amounts are 12.00, 6.00, and 4.00; subtotal is 22.00. The sample is labeled fictional and not valid. Exact extracted text and formatting can vary; these are verification targets, not a claim of a live model run.
+Item amounts are 12.00, 6.00, and 4.00; subtotal is 22.00. The sample is labeled fictional and not valid. These are verification targets rather than guaranteed outputs; observed live-run errors are documented below.
+
+### Observed image extraction issue
+
+Two user-reported live runs against the bundled `receipt.png` on October 20, 2026 returned correct dates, amounts, and currency, but incomplete or incorrect receipt text. Sharpening the instructions to request complete names and every merchandise row did not resolve the errors in the second run.
+
+| Field | Printed on the receipt | Latest reported result |
+| --- | --- | --- |
+| Vendor | `NORTHWIND MARKET` | `NORTHW MARKET` |
+| Bread description | `Sourdough Bread` | `Sdough Bread` |
+| Final merchandise item | `Apples` | Missing from the items list |
+
+The first run returned `NORTHWIND` for the vendor and had the same bread truncation and missing Apples. Both reported runs returned receipt date `2026-10-20`, total `23.76`, tax `1.76`, and currency `USD` correctly.
+
+The example remains a direct image-to-typed-fields demonstration of Clairic's vision capability, with no separate OCR stage or hard-coded answer corrections. These observations concern this sample and these runs; the underlying cause has not been established. Valid typed output did not ensure accurate or complete text extraction. Compare results with the image and the expected-facts table above when evaluating this example.
