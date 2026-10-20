@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Sharpened receipt extraction instructions to preserve the full merchant name, exact item spelling, and every merchandise row without embedding sample answers.
+
 ### Added
 
 - Bundled fictional `examples/receipt.png` with checkable totals; the image example defaults to this file.
