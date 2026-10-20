@@ -4,6 +4,7 @@
 
 ### Added
 
+- Bundled fictional `examples/receipt.png` with checkable totals; the image example defaults to this file.
 - Receipt image example with local image paths, optional text context, ordered extraction, and usage documentation; included in module installation.
 
 ## [0.2.0] - 2026-10-20

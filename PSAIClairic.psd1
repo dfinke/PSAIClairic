@@ -22,6 +22,7 @@
         'examples/Estimates.ps1'
         'examples/Forecast.ps1'
         'examples/ReceiptImage.ps1'
+        'examples/receipt.png'
         'examples/README.md'
         'README.md'
         'CHANGELOG.md'

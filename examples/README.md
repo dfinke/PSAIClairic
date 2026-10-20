@@ -28,16 +28,32 @@ Appointment facts provide checkable targets: December 4 resolves to 2026-12-04, 
 
 ## Receipt images
 
-Supply your own local PNG, JPEG, or WebP receipt image. No sample receipt or credentials are bundled.
+Run with the bundled fictional `receipt.png`, or supply your own local PNG, JPEG, or WebP image. Credentials are not bundled. The sample was created with the built-in image generation tool: a crisp, front-on fictional Northwind Market receipt with exact item text and checkable totals.
 
 ```powershell
+# Uses receipt.png beside the script, regardless of your working directory.
+.\examples\ReceiptImage.ps1
+
 .\examples\ReceiptImage.ps1 -ImagePath 'D:\receipts\receipt.png'
 
 # Multiple images must belong to the same receipt (for example, two halves).
 .\examples\ReceiptImage.ps1 -ImagePath './receipt-top.jpg', './receipt-bottom.jpg'
 
 # Optional text context accompanies the image.
-.\examples\ReceiptImage.ps1 -ImagePath './receipt.png' -State 'Read this receipt. The date format is day/month/year.'
+.\examples\ReceiptImage.ps1 -State 'Read this receipt. The date format is day/month/year.'
 ```
 
 Up to four images, 4 MiB each and 8 MiB combined decoded; remote URLs are not supported. Missing scalar facts may return null. Verify extracted amounts and dates against the original receipt.
+
+The bundled sample contains these checkable facts:
+
+| Field | Expected fact |
+| --- | --- |
+| Vendor | NORTHWIND MARKET |
+| Receipt date | 2026-10-20 |
+| Total | 23.76 |
+| Tax | 1.76 |
+| Currency | USD |
+| Items | Coffee Beans; Sourdough Bread; Apples |
+
+Item amounts are 12.00, 6.00, and 4.00; subtotal is 22.00. The sample is labeled fictional and not valid. Exact extracted text and formatting can vary; these are verification targets, not a claim of a live model run.

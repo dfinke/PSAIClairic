@@ -69,7 +69,7 @@ Each example makes one live request and prints its source text followed by order
 | `./examples/Appointment.ps1` | Text, number, date, time, datetime, duration, and a missing technician |
 | `./examples/Lists.ps1` | Text, number, and date lists, including an empty-list case |
 | `./examples/Estimates.ps1` | Numeric and date estimates, logarithmic scale, quantiles, and prediction intervals |
-| `./examples/ReceiptImage.ps1 -ImagePath ./receipt.png` | Receipt image extraction: merchant, date, total, tax, currency, and purchased items |
+| `./examples/ReceiptImage.ps1` | Bundled sample receipt (or your own image): merchant, date, total, tax, currency, and items |
 | `./examples/Forecast.ps1` | Daily and weekly forecasts with per-step distributions |
 
 Together they cover **all nine field types**. See the [examples guide](examples/README.md) for expected facts and interpretation. Estimates and forecasts retain `$result` for uncertainty inspection; dot-source those scripts if you want their variables available afterward.

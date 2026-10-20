@@ -1,7 +1,7 @@
 param(
-    [Parameter(Mandatory, Position = 0)]
+    [Parameter(Position = 0)]
     [ValidateCount(1, 4)]
-    [string[]]$ImagePath,
+    [string[]]$ImagePath = @((Join-Path $PSScriptRoot 'receipt.png')),
 
     [string]$State = 'Read these images as one receipt. Extract the requested fields from visible receipt content; do not invent missing information.'
 )
