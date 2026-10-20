@@ -3,3 +3,6 @@
 !.env.example
 TestResults.xml
 *.coverage.xml
+
+# Local video recording script
+/VideoScript.md
