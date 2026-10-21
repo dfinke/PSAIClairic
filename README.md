@@ -44,24 +44,7 @@ Install-Module PSAIClairic -Scope CurrentUser
 Import-Module PSAIClairic
 ```
 
-The Gallery command is available after the first package is published. To use the public GitHub checkout before then, or develop the module locally, install from source below.
-
-## Install from source
-
-```powershell
-git clone https://github.com/dfinke/PSAIClairic.git
-Set-Location PSAIClairic
-./InstallModule.ps1
-Import-Module PSAIClairic
-```
-
-The installer copies only manifest-listed package files into your current user's versioned PowerShell module directory. Git metadata, tests, publishing scripts, credentials, and local notes are excluded. It does not require administrator access or remove unrelated files. Use `-WhatIf` to inspect the destination, or `-FullPath` to choose a module directory explicitly.
-
-To work directly from the checkout:
-
-```powershell
-Import-Module ./PSAIClairic.psd1 -Force
-```
+The Gallery command is available after the first package is published.
 
 ## Connect to Cloudflare
 
