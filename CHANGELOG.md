@@ -1,32 +1,23 @@
 # Changelog
 
-## [Unreleased]
-
-### Changed
-
-- Sharpened receipt extraction instructions to preserve the full merchant name, exact item spelling, and every merchandise row without embedding sample answers.
-
-### Added
-
-- Added a transparent PSAIClairic logo and centered README header, with the asset included in module installation.
-- Bundled fictional `examples/receipt.png` with checkable totals; the image example defaults to this file.
-- Receipt image example with local image paths, optional text context, ordered extraction, and usage documentation; included in module installation.
-
 ## [0.2.0] - 2026-10-20
 
 ### Added
 
 - Optional `FieldOrder` on `ConvertFrom-ClairicAnswer`, preserving nulls and arrays while ordering projected properties.
 - Appointment, list, estimate, and forecast examples covering all nine field types and every list item type.
-- Example guide with checkable extraction targets and uncertainty guidance.
+- Receipt image example with optional text context and a bundled fictional `receipt.png` with checkable totals.
+- Example guide with expected facts, uncertainty guidance, and observed receipt image extraction errors.
+- Transparent PSAIClairic logo and centered README header.
 - MIT license and repository metadata.
 
 ### Changed
 
-- Invoice example now pipes directly into `ConvertFrom-ClairicAnswer` and no longer declares an unused preview switch.
-- README now includes installation, authentication, complete field coverage, and result interpretation.
-- Local installer now targets PSAIClairic, copies manifest-listed files into a versioned current-user module directory, and supports `WhatIf` without mirroring or deleting destination files.
-- Gallery helper now publishes PSAIClairic from the project manifest.
+- Invoice example pipes directly into `ConvertFrom-ClairicAnswer` and no longer declares an unused preview switch.
+- Receipt instructions request the complete merchant name, exact item spelling, and every merchandise row without embedding sample answers.
+- README includes Gallery and source installation, authentication, all field types, and result interpretation.
+- Local installer copies only manifest-listed package files into the current user's versioned PowerShell module directory. Git metadata, tests, publishing scripts, credentials, and the local video script are not copied.
+- Gallery helper installs the package first, publishes the matching installed version by name, and excludes any installed files outside the manifest's package list.
 
 ## [0.1.0] - 2026-10-20
 

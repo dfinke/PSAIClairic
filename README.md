@@ -35,6 +35,17 @@ The facts in this example determine invoice `INV-2291`, total `1080`, and due da
 
 PowerShell 7.2 or later. No extra runtime modules. Powered by Cloudflare Workers AI's preview [Clairic model](https://developers.cloudflare.com/workers-ai/models/clairic/).
 
+## Install
+
+From PowerShell Gallery:
+
+```powershell
+Install-Module PSAIClairic -Scope CurrentUser
+Import-Module PSAIClairic
+```
+
+The Gallery command is available after the first package is published. To use the public GitHub checkout before then, or develop the module locally, install from source below.
+
 ## Install from source
 
 ```powershell
@@ -44,7 +55,7 @@ Set-Location PSAIClairic
 Import-Module PSAIClairic
 ```
 
-The repository is private, so cloning requires access. The installer copies the module into your current user's versioned PowerShell module directory. It does not require administrator access or remove unrelated files. Use `-WhatIf` to inspect the destination, or `-FullPath` to choose a module directory explicitly.
+The installer copies only manifest-listed package files into your current user's versioned PowerShell module directory. Git metadata, tests, publishing scripts, credentials, and local notes are excluded. It does not require administrator access or remove unrelated files. Use `-WhatIf` to inspect the destination, or `-FullPath` to choose a module directory explicitly.
 
 To work directly from the checkout:
 
@@ -65,7 +76,12 @@ $env:CLOUDFLARE_AUTH_TOKEN = '<your API token>'
 
 ## Try the examples
 
-Each example makes one live request and prints its source text followed by ordered results. Run from the checkout root after setting your credentials.
+Each example makes one live request and returns ordered results. Text examples also print their source text. Run from the checkout root after setting your credentials, or use the installed module folder:
+
+```powershell
+Set-Location (Get-Module PSAIClairic -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase
+./examples/Invoice.ps1
+```
 
 | Example | What it exercises |
 | --- | --- |
@@ -146,6 +162,20 @@ Estimates include statistics such as `median`, `p10`, and `p90`. The interval fr
 - For local request inspection, the module supports `Invoke-Clairic ... -PreviewRequest`; it returns JSON without credentials or a network call.
 
 Clairic is a preview service; availability, pricing, and behavior can change. Consult the [model reference](https://developers.cloudflare.com/workers-ai/models/clairic/) for current details. Bundled schemas were retrieved October 20, 2026.
+
+## Publishing
+
+Run from a source checkout with PowerShellGet installed and a PowerShell Gallery API key authorized to publish PSAIClairic:
+
+```powershell
+# Inspects the action without installing or publishing.
+./PublishToGallery.ps1 -NuGetApiKey $NuGetApiKey -WhatIf
+
+# Installs the package files, then publishes that installed version.
+./PublishToGallery.ps1 -NuGetApiKey $NuGetApiKey
+```
+
+The helper runs `InstallModule.ps1`, verifies that the installed version resolves through `PSModulePath`, and publishes by module name and exact version. The installer copies only `FileList` entries; the publisher also excludes any installed files outside that list. This keeps Git files, tests, helper scripts, secrets, and local notes such as `VideoScript.md` out of the package. Unrelated installed files are preserved locally. The API key is supplied at runtime and must not be committed.
 
 ## Development
 

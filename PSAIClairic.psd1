@@ -34,7 +34,7 @@
             Tags = @('Cloudflare', 'WorkersAI', 'Clairic', 'AI', 'Extraction', 'Forecasting')
             ProjectUri = 'https://github.com/dfinke/PSAIClairic'
             LicenseUri = 'https://github.com/dfinke/PSAIClairic/blob/main/LICENSE'
-            ReleaseNotes = '0.2.0: Ordered answer projection, examples for all nine field types, refreshed documentation, MIT license, and module installer. See CHANGELOG.md.'
+            ReleaseNotes = '0.2.0: Typed extraction, computation, estimates and forecasts; ordered PowerShell objects; examples for all nine types and receipt images; documented vision limitations; MIT license; package-only installation and publishing. See CHANGELOG.md.'
         }
     }
 }

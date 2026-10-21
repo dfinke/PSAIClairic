@@ -3,7 +3,8 @@
 .SYNOPSIS
 Installs PSAIClairic for the current user from this checkout.
 .DESCRIPTION
-Copies only manifest-listed module files. Existing matching files are updated;
+Copies only manifest-listed module files, excluding Git metadata, tests,
+publishing scripts, credentials, and local notes. Existing matching files are updated;
 unrelated destination files are preserved. FullPath overrides the module's
 version directory. Supports WhatIf and Confirm.
 .EXAMPLE
