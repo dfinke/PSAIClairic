@@ -1,9 +1,10 @@
 # Clairic examples
 
-Run these scripts with PowerShell 7.2 or later. Set `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_AUTH_TOKEN` in your session first. Each script makes one live request and returns ordered results. Text examples also print their source text.
+Run these scripts with PowerShell 7.2 or later. Set `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_AUTH_TOKEN` in your session first. Each standalone script makes one live request and returns ordered results. The BatchInvoices walkthrough makes one request per invoice. Text examples also print their source text.
 
 | Script | Field types and behavior |
 | --- | --- |
+| [BatchInvoices](BatchInvoices/README.md) | Read six invoices from JSON, loop through Clairic, and collect an array of typed invoice details |
 | `Invoice.ps1` | Text, date, number, text list, estimate; invoice extraction and arithmetic |
 | `Appointment.ps1` | Text, date, time, datetime, duration, number; year anchoring, elapsed time, labor cost, and a missing technician |
 | `Lists.ps1` | List of text, numbers, and dates; an empty list when no phone numbers are present |

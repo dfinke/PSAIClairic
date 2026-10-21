@@ -44,8 +44,6 @@ Install-Module PSAIClairic -Scope CurrentUser
 Import-Module PSAIClairic
 ```
 
-The Gallery command is available after the first package is published.
-
 ## Connect to Cloudflare
 
 Set these environment variables in your current session using your own account ID and a token with Workers AI Read permission:
@@ -59,7 +57,7 @@ $env:CLOUDFLARE_AUTH_TOKEN = '<your API token>'
 
 ## Try the examples
 
-Each example makes one live request and returns ordered results. Text examples also print their source text. Run from the checkout root after setting your credentials, or use the installed module folder:
+Each standalone script makes one live request and returns ordered results. The BatchInvoices walkthrough makes one request per invoice. Text examples also print their source text. Run from the checkout root after setting your credentials, or use the installed module folder:
 
 ```powershell
 Set-Location (Get-Module PSAIClairic -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase
@@ -68,6 +66,7 @@ Set-Location (Get-Module PSAIClairic -ListAvailable | Sort-Object Version -Desce
 
 | Example | What it exercises |
 | --- | --- |
+| [BatchInvoices](examples/BatchInvoices/README.md) | Read invoices from JSON, extract each one, and return an array of invoice details |
 | `./examples/Invoice.ps1` | Invoice extraction, total calculation, due date, missing PO number, contacts, and payment estimate |
 | `./examples/Appointment.ps1` | Text, number, date, time, datetime, duration, and a missing technician |
 | `./examples/Lists.ps1` | Text, number, and date lists, including an empty-list case |
@@ -158,7 +157,7 @@ Run from a source checkout with PowerShellGet installed and a PowerShell Gallery
 ./PublishToGallery.ps1 -NuGetApiKey $NuGetApiKey
 ```
 
-The helper runs `InstallModule.ps1`, verifies that the installed version resolves through `PSModulePath`, and publishes by module name and exact version. The installer copies only `FileList` entries; the publisher also excludes any installed files outside that list. This keeps Git files, tests, helper scripts, secrets, and local notes such as `VideoScript.md` out of the package. Unrelated installed files are preserved locally. The API key is supplied at runtime and must not be committed.
+The helper runs `InstallModule.ps1`, verifies that the installed version resolves through `PSModulePath`, and publishes by module name and exact version. The installer copies only `FileList` entries; the publisher also excludes any installed files outside that list. This keeps Git files, tests, helper scripts, secrets, and local notes such as `VideoScript.md` out of the package. Unrelated installed files are preserved locally. The helper accepts `-NuGetApiKey` or reads the `NuGetApiKey` environment variable. A real publication fails before installation if neither supplies a key; `-WhatIf` needs no key. Keep the key out of source control.
 
 ## Development
 

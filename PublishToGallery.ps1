@@ -9,9 +9,7 @@ Gallery package. WhatIf performs no installation or publication.
 #>
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter(Mandatory)]
-    [ValidateNotNullOrEmpty()]
-    [string]$NuGetApiKey
+    [string]$NuGetApiKey = $env:NuGetApiKey
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,6 +17,9 @@ $manifestPath = Join-Path $PSScriptRoot 'PSAIClairic.psd1'
 $manifest = Test-ModuleManifest -Path $manifestPath -ErrorAction Stop
 $data = Import-PowerShellDataFile -LiteralPath $manifestPath
 if ($PSCmdlet.ShouldProcess('PSGallery', "Install and publish PSAIClairic $($manifest.Version)")) {
+    if ([string]::IsNullOrWhiteSpace($NuGetApiKey)) {
+        throw 'Supply -NuGetApiKey or set the NuGetApiKey environment variable before publishing.'
+    }
     $installed = & (Join-Path $PSScriptRoot 'InstallModule.ps1') -Confirm:$false
     if (-not $installed -or -not $installed.FullName) { throw 'Installation did not return a module directory.' }
     $resolved = Get-Module -ListAvailable -Name PSAIClairic |
@@ -31,11 +32,11 @@ if ($PSCmdlet.ShouldProcess('PSGallery', "Install and publish PSAIClairic $($man
         ForEach-Object { [IO.Path]::GetRelativePath($installed.FullName, $_.FullName).Replace('\', '/') } |
         Where-Object { $_ -notin $packageFiles })
     $publish = @{
-        Name = 'PSAIClairic'
+        Name            = 'PSAIClairic'
         RequiredVersion = $manifest.Version.ToString()
-        NuGetApiKey = $NuGetApiKey
-        Repository = 'PSGallery'
-        ErrorAction = 'Stop'
+        NuGetApiKey      = $NuGetApiKey
+        Repository      = 'PSGallery'
+        ErrorAction     = 'Stop'
     }
     if ($excluded.Count) { $publish.Exclude = $excluded }
     Publish-Module @publish

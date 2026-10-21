@@ -51,6 +51,32 @@ Describe 'Gallery package boundaries' {
         Test-Path -LiteralPath $installMarker | Should -BeFalse
         Should -Invoke Publish-Module -Times 0
     }
+    It 'accepts the Gallery key from the environment' {
+        $previousKey = $env:NuGetApiKey
+        try {
+            $env:NuGetApiKey = 'test-environment-placeholder'
+            & (Join-Path $fixture 'PublishToGallery.ps1')
+            Should -Invoke Publish-Module -Times 1 -Exactly -ParameterFilter { $NuGetApiKey -eq 'test-environment-placeholder' }
+        } finally { $env:NuGetApiKey = $previousKey }
+    }
+    It 'rejects a missing key before installing or publishing' {
+        $previousKey = $env:NuGetApiKey
+        try {
+            Remove-Item Env:NuGetApiKey -ErrorAction SilentlyContinue
+            { & (Join-Path $fixture 'PublishToGallery.ps1') } | Should -Throw '*Supply -NuGetApiKey*'
+            Test-Path -LiteralPath $installMarker | Should -BeFalse
+            Should -Invoke Publish-Module -Times 0
+        } finally { $env:NuGetApiKey = $previousKey }
+    }
+    It 'allows WhatIf without a Gallery key' {
+        $previousKey = $env:NuGetApiKey
+        try {
+            Remove-Item Env:NuGetApiKey -ErrorAction SilentlyContinue
+            & (Join-Path $fixture 'PublishToGallery.ps1') -WhatIf
+            Test-Path -LiteralPath $installMarker | Should -BeFalse
+            Should -Invoke Publish-Module -Times 0
+        } finally { $env:NuGetApiKey = $previousKey }
+    }
     It 'refuses to publish a different module resolved through PSModulePath' {
         Mock Get-Module { [pscustomobject]@{ Version=[version]'0.2.0'; ModuleBase='different-folder' } } -ParameterFilter { $ListAvailable -and $Name -eq 'PSAIClairic' }
         { & (Join-Path $fixture 'PublishToGallery.ps1') -NuGetApiKey 'test-placeholder' } | Should -Throw '*module-path ordering*'

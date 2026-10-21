@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- BatchInvoices walkthrough and runnable `ExtractInvoices.ps1` demo with six fictional invoices in JSON, ordered results, and progress reporting that clears on completion or failure.
+
+### Changed
+
+- Publishing supports the NuGetApiKey environment variable and validates missing keys before installation. WhatIf works without a key.
+- README installation guidance reflects the published Gallery package.
+
 ## [0.2.0] - 2026-10-20
 
 ### Added
